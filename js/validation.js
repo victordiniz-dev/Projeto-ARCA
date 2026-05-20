@@ -101,16 +101,24 @@ const Validation = (function () {
     const formGroup = inputEl.closest('.form-group');
     let errorEl = formGroup ? formGroup.querySelector('.form-error') : null;
     
+    // Add dynamic ID to errorEl for aria-describedby if input has ID
+    if (errorEl && inputEl.id) {
+      errorEl.id = `${inputEl.id}-error`;
+    }
+    
     if (isValid) {
       inputEl.classList.remove('is-invalid');
       inputEl.classList.add('is-valid');
+      inputEl.setAttribute('aria-invalid', 'false');
       if (errorEl) {
         errorEl.style.display = 'none';
         errorEl.textContent = '';
+        inputEl.removeAttribute('aria-describedby');
       }
     } else {
       inputEl.classList.remove('is-valid');
       inputEl.classList.add('is-invalid');
+      inputEl.setAttribute('aria-invalid', 'true');
       
       if (errorEl) {
         errorEl.style.display = 'flex';
@@ -122,6 +130,7 @@ const Validation = (function () {
           </svg>
           ${errorMessage}
         `;
+        inputEl.setAttribute('aria-describedby', errorEl.id);
       }
     }
   }
@@ -133,6 +142,8 @@ const Validation = (function () {
   function resetFieldState(inputEl) {
     if (!inputEl) return;
     inputEl.classList.remove('is-valid', 'is-invalid');
+    inputEl.removeAttribute('aria-invalid');
+    inputEl.removeAttribute('aria-describedby');
     const formGroup = inputEl.closest('.form-group');
     const errorEl = formGroup ? formGroup.querySelector('.form-error') : null;
     if (errorEl) {

@@ -262,7 +262,8 @@
       let myReports = Utils.Storage.get('arca_my_reports') || [];
 
       // Seed mock defaults if completely new user
-      if (myPets.length === 0 && mySchedules.length === 0) {
+      const isSeeded = Utils.Storage.get('arca_seeded');
+      if (!isSeeded) {
         myPets = [
           { id: 101, name: 'Bidu', species: 'Cão', breed: 'SRD (Vira-lata)', gender: 'Macho', weight: '12kg' },
           { id: 102, name: 'Mel', species: 'Gato', breed: 'Siamês', gender: 'Fêmea', weight: '4kg' }
@@ -273,6 +274,7 @@
           { id: 201, petId: 101, petName: 'Bidu', service: 'Castração', date: '2026-05-28', time: '09:00', status: 'Aprovado' }
         ];
         Utils.Storage.set('arca_my_schedules', mySchedules);
+        Utils.Storage.set('arca_seeded', true);
       }
 
       // Render counters
