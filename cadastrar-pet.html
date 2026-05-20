@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Cadastre seu pet no Programa ARCA para gerenciar agendamentos de castração gratuita.">
+  <title>Cadastrar Pet - Programa ARCA</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <style>
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--color-primary-light);
+      color: var(--color-primary-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: var(--font-weight-bold);
+      font-size: var(--font-size-base);
+    }
+
+    .form-row {
+      display: flex;
+      gap: var(--space-md);
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    @media (max-width: 768px) {
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard">
+    <!-- ==================== SIDEBAR ==================== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__close" id="sidebarCloseBtn" aria-label="Fechar menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </div>
+
+      <div class="sidebar__header">
+        <a href="index.html" class="sidebar__logo">
+          <div class="sidebar__logo-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 10c-1.5 2-3 3.5-3 5.5a3 3 0 1 0 6 0c0-2-1.5-3.5-3-5.5z"/>
+              <circle cx="7" cy="6" r="2"/><circle cx="17" cy="6" r="2"/>
+            </svg>
+          </div>
+          <span class="sidebar__logo-text">Programa <span>ARCA</span></span>
+        </a>
+      </div>
+
+      <nav class="sidebar__nav">
+        <div class="sidebar__nav-section">
+          <div class="sidebar__nav-label">Navegação</div>
+          <a href="dashboard.html" class="sidebar__link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            Visão Geral
+          </a>
+          <a href="meus-pets.html" class="sidebar__link active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 10c-1.5 2-3 3.5-3 5.5a3 3 0 1 0 6 0c0-2-1.5-3.5-3-5.5z"/><circle cx="7" cy="6" r="2"/><circle cx="17" cy="6" r="2"/></svg>
+            Meus Pets
+          </a>
+          <a href="agendamento.html" class="sidebar__link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            Agendar Serviço
+          </a>
+          <a href="relatorios.html" class="sidebar__link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            Relatórios / Histórico
+          </a>
+        </div>
+
+        <div class="sidebar__nav-section">
+          <div class="sidebar__nav-label">Serviços Externos</div>
+          <a href="resgate.html" class="sidebar__link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            Solicitar Resgate
+          </a>
+          <a href="denuncia.html" class="sidebar__link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Denúncia Anônima
+          </a>
+        </div>
+      </nav>
+
+      <div class="sidebar__footer">
+        <div class="sidebar__user">
+          <div class="avatar" id="sidebarAvatar">VD</div>
+          <div class="sidebar__user-info">
+            <div class="sidebar__user-name" id="sidebarUserName">Victor Diniz</div>
+            <div class="sidebar__user-email" id="sidebarUserEmail">victor.diniz@gmail.com</div>
+          </div>
+        </div>
+        <button class="sidebar__logout" id="logoutBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          Sair do Painel
+        </button>
+      </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <button class="sidebar__toggle" id="sidebarToggleBtn" aria-label="Abrir menu lateral">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </button>
+
+    <!-- ==================== CONTENT ==================== -->
+    <main class="dashboard__content">
+      
+      <!-- HEADER -->
+      <header class="dash-header">
+        <div class="dash-header__left">
+          <div style="font-size: var(--font-size-xs); color: var(--color-text-muted);">Painel / Meus Pets / Novo Pet</div>
+          <h1 class="dash-header__title" style="font-size: 1.5rem; margin: 0;">Cadastrar Novo Pet</h1>
+        </div>
+        <div class="dash-header__right">
+          <div class="avatar" id="headerAvatar">VD</div>
+        </div>
+      </header>
+
+      <!-- MAIN BODY -->
+      <div class="dashboard__main">
+        
+        <div class="dash-section" style="max-width: 720px; margin: 0 auto;">
+          <div class="dash-section__header">
+            <h2 class="dash-section__title">Ficha Cadastral do Animal</h2>
+            <a href="meus-pets.html" class="btn btn-ghost btn-sm">Voltar</a>
+          </div>
+          <div class="dash-section__body">
+            
+            <form id="petForm" novalidate>
+              
+              <!-- Drag and Drop Photo Upload -->
+              <div class="form-group">
+                <label class="form-label">Foto do Pet</label>
+                <div class="file-upload" id="photoDropArea">
+                  <svg class="file-upload__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                    <polyline points="21 15 16 10 5 21"></polyline>
+                  </svg>
+                  <div class="file-upload__text">Envie uma foto do seu pet</div>
+                  <div class="file-upload__hint">Arraste aqui ou clique para selecionar (JPG/PNG)</div>
+                  <input type="file" id="photoUpload" accept="image/*">
+                  <div id="photoPreview"></div>
+                </div>
+              </div>
+
+              <!-- Informações Básicas -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="petName" class="form-label">Nome do Pet <span class="required">*</span></label>
+                  <input type="text" id="petName" class="form-input" placeholder="Ex: Rex, Bolinha, etc." required>
+                  <div class="form-error"></div>
+                </div>
+                <div class="form-group">
+                  <label for="petSpecies" class="form-label">Espécie <span class="required">*</span></label>
+                  <select id="petSpecies" class="form-select" required>
+                    <option value="">Selecione...</option>
+                    <option value="Cão">Cão</option>
+                    <option value="Gato">Gato</option>
+                  </select>
+                  <div class="form-error"></div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="petBreed" class="form-label">Raça <span class="required">*</span></label>
+                  <input type="text" id="petBreed" class="form-input" placeholder="Ex: Vira-lata, Poodle, Siamês..." required>
+                  <div class="form-error"></div>
+                </div>
+                <div class="form-group">
+                  <label for="petGender" class="form-label">Sexo <span class="required">*</span></label>
+                  <select id="petGender" class="form-select" required>
+                    <option value="">Selecione...</option>
+                    <option value="Macho">Macho</option>
+                    <option value="Fêmea">Fêmea</option>
+                  </select>
+                  <div class="form-error"></div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="petAge" class="form-label">Idade Estimada <span class="required">*</span></label>
+                  <select id="petAge" class="form-select" required>
+                    <option value="">Selecione...</option>
+                    <option value="Filhote">Filhote (menos de 1 ano)</option>
+                    <option value="Jovem">Jovem (1 a 2 anos)</option>
+                    <option value="Adulto">Adulto (3 a 7 anos)</option>
+                    <option value="Idoso">Sênior (mais de 7 anos)</option>
+                  </select>
+                  <div class="form-error"></div>
+                </div>
+                <div class="form-group">
+                  <label for="petWeight" class="form-label">Peso Estimado (kg) <span class="required">*</span></label>
+                  <input type="text" id="petWeight" class="form-input" placeholder="Ex: 5kg, 12kg" required>
+                  <div class="form-error"></div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="petColor" class="form-label">Cor / Marcações <span class="required">*</span></label>
+                  <input type="text" id="petColor" class="form-input" placeholder="Ex: Preto e Branco, Caramelo, Tigrado..." required>
+                  <div class="form-error"></div>
+                </div>
+                <div class="form-group" style="display: flex; align-items: center; margin-top: 32px;">
+                  <label class="form-check">
+                    <input type="checkbox" id="petNeutered">
+                    <span>O animal já é castrado?</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Saúde / Comentários -->
+              <div class="form-group" style="margin-top: var(--space-md);">
+                <label for="petHealth" class="form-label">Observações de Saúde / Cuidados Especiais</label>
+                <textarea id="petHealth" class="form-textarea" placeholder="Caso seu pet tenha alguma alergia, doença crônica ou precise de cuidados específicos, informe aqui..."></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top: var(--space-xl);" id="submitBtn">
+                Cadastrar Pet no Sistema
+              </button>
+
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="js/utils.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/forms.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Force Login Auth check
+      const loggedUser = Utils.Storage.get('arca_user');
+      if (!loggedUser) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      // Update User details
+      const initials = loggedUser.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+      document.getElementById('sidebarAvatar').textContent = initials;
+      document.getElementById('headerAvatar').textContent = initials;
+      document.getElementById('sidebarUserName').textContent = loggedUser.name;
+      document.getElementById('sidebarUserEmail').textContent = loggedUser.email;
+
+      // Logout handler
+      document.getElementById('logoutBtn').addEventListener('click', () => {
+        Utils.Storage.remove('arca_user');
+        window.location.href = 'index.html';
+      });
+
+      // Setup validations
+      const petForm = document.getElementById('petForm');
+      if (petForm) {
+        Validation.setupFormValidation(petForm);
+
+        // Setup Drag & Drop File Upload preview
+        Forms.setupFileUpload('photoDropArea', 'photoUpload', 'photoPreview');
+
+        petForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+
+          if (Validation.validateForm(petForm)) {
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.classList.add('loading');
+
+            setTimeout(() => {
+              submitBtn.classList.remove('loading');
+
+              // Save to LocalStorage
+              const myPets = Utils.Storage.get('arca_my_pets') || [];
+              const newPet = {
+                id: Math.floor(Math.random() * 1000),
+                name: document.getElementById('petName').value,
+                species: document.getElementById('petSpecies').value,
+                breed: document.getElementById('petBreed').value,
+                gender: document.getElementById('petGender').value,
+                age: document.getElementById('petAge').value,
+                weight: document.getElementById('petWeight').value,
+                color: document.getElementById('petColor').value,
+                neutered: document.getElementById('petNeutered').checked,
+                health: document.getElementById('petHealth').value
+              };
+              myPets.push(newPet);
+              Utils.Storage.set('arca_my_pets', myPets);
+
+              if (window.showToast) window.showToast('Pet cadastrado com sucesso!', 'success');
+
+              setTimeout(() => {
+                window.location.href = 'meus-pets.html';
+              }, 1200);
+
+            }, 1500);
+
+          } else {
+            if (window.showToast) window.showToast('Por favor, preencha todos os campos obrigatórios.', 'error');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

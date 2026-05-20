@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Área de login do Programa ARCA - Acesse o painel de tutor para gerenciar castrações, adoções e pets.">
+  <title>Entrar - Programa ARCA</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <style>
+    body {
+      background: linear-gradient(135deg, var(--color-primary-50) 0%, #FFFFFF 50%, var(--color-secondary-light) 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .auth-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-xl) var(--space-md);
+      position: relative;
+    }
+
+    .auth-container::before {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(0, 208, 132, 0.08) 0%, transparent 70%);
+      top: 10%;
+      left: 10%;
+      border-radius: 50%;
+    }
+
+    .auth-container::after {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(91, 159, 237, 0.06) 0%, transparent 70%);
+      bottom: 10%;
+      right: 10%;
+      border-radius: 50%;
+    }
+
+    .auth-card {
+      background: #FFFFFF;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-xl);
+      width: 100%;
+      max-width: 460px;
+      padding: var(--space-2xl);
+      border: 1px solid var(--color-border-light);
+      position: relative;
+      z-index: 1;
+      animation: scaleIn 0.4s ease;
+    }
+
+    .auth-header {
+      text-align: center;
+      margin-bottom: var(--space-xl);
+    }
+
+    .auth-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+      text-decoration: none;
+    }
+
+    .auth-logo-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+    }
+
+    .auth-logo-icon svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .auth-logo-text {
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-extrabold);
+      color: var(--color-text);
+    }
+
+    .auth-logo-text span {
+      color: var(--color-primary);
+    }
+
+    .auth-title {
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-bold);
+      margin-bottom: var(--space-xs);
+    }
+
+    .auth-subtitle {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-muted);
+    }
+
+    .auth-actions-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: var(--space-md);
+      margin-bottom: var(--space-lg);
+    }
+
+    .auth-footer-text {
+      text-align: center;
+      font-size: var(--font-size-sm);
+      color: var(--color-text-light);
+      margin-top: var(--space-xl);
+    }
+
+    .back-to-home {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-light);
+      transition: color var(--transition-fast);
+      margin-top: var(--space-lg);
+    }
+
+    .back-to-home:hover {
+      color: var(--color-primary);
+    }
+
+    .back-to-home svg {
+      width: 16px;
+      height: 16px;
+      transition: transform var(--transition-fast);
+    }
+
+    .back-to-home:hover svg {
+      transform: translateX(-4px);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <a href="index.html" class="auth-logo">
+          <div class="auth-logo-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 10c-1.5 2-3 3.5-3 5.5a3 3 0 1 0 6 0c0-2-1.5-3.5-3-5.5z"/>
+              <circle cx="7" cy="6" r="2"/>
+              <circle cx="17" cy="6" r="2"/>
+              <circle cx="4.5" cy="11" r="1.5"/>
+              <circle cx="19.5" cy="11" r="1.5"/>
+            </svg>
+          </div>
+          <span class="auth-logo-text">Programa <span>ARCA</span></span>
+        </a>
+        <h1 class="auth-title">Bem-vindo de volta!</h1>
+        <p class="auth-subtitle">Acesse sua conta para gerenciar seus agendamentos e pets.</p>
+      </div>
+
+      <form id="loginForm" novalidate>
+        <!-- E-mail ou CPF -->
+        <div class="form-group">
+          <label for="identifier" class="form-label">E-mail ou CPF <span class="required">*</span></label>
+          <div class="form-input-wrapper">
+            <input type="text" id="identifier" name="identifier" class="form-input" placeholder="Digite seu e-mail ou CPF" required>
+            <div class="input-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+            <div class="form-error"></div>
+          </div>
+        </div>
+
+        <!-- Senha -->
+        <div class="form-group">
+          <label for="password" class="form-label">Senha <span class="required">*</span></label>
+          <div class="form-input-wrapper">
+            <input type="password" id="password" name="password" class="form-input" placeholder="Sua senha de acesso" required>
+            <div class="input-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+            </div>
+            <button type="button" class="input-action" data-toggle-password aria-label="Mostrar senha">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+            <div class="form-error"></div>
+          </div>
+        </div>
+
+        <div class="auth-actions-footer">
+          <label class="form-check">
+            <input type="checkbox" id="remember">
+            <span>Lembrar-me</span>
+          </label>
+          <a href="#" class="link small" id="forgotPassword">Esqueceu sua senha?</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg" id="submitBtn">
+          Entrar
+        </button>
+      </form>
+
+      <div class="auth-footer-text">
+        Ainda não tem conta? <a href="cadastro.html" class="link">Cadastre-se aqui</a>
+      </div>
+
+      <div class="text-center">
+        <a href="index.html" class="back-to-home">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          Voltar para a página inicial
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="js/utils.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/main.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginForm = document.getElementById('loginForm');
+      const identifierInput = document.getElementById('identifier');
+      
+      if (loginForm) {
+        Validation.setupFormValidation(loginForm);
+
+        // Simple mask for CPF or Email input detection
+        identifierInput.addEventListener('input', () => {
+          let val = identifierInput.value.replace(/\D/g, '');
+          if (val.length > 0 && /^\d+$/.test(val)) {
+            // Treat as CPF if digits are typed
+            identifierInput.value = Utils.formatCPF(identifierInput.value);
+          }
+        });
+
+        loginForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          
+          if (Validation.validateForm(loginForm)) {
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.classList.add('loading');
+            
+            // Mock Login saving
+            setTimeout(() => {
+              submitBtn.classList.remove('loading');
+              
+              // Set mock user data
+              const isCPF = /^\d/.test(identifierInput.value);
+              const mockUser = {
+                name: 'Victor Diniz',
+                email: isCPF ? 'victor.diniz@gmail.com' : identifierInput.value,
+                cpf: isCPF ? identifierInput.value : '123.456.789-00'
+              };
+              Utils.Storage.set('arca_user', mockUser);
+              
+              if (window.showToast) window.showToast('Login realizado com sucesso! Redirecionando...', 'success');
+              
+              setTimeout(() => {
+                window.location.href = 'dashboard.html';
+              }, 1000);
+            }, 1500);
+          } else {
+            if (window.showToast) window.showToast('Por favor, preencha todos os campos corretamente.', 'error');
+          }
+        });
+      }
+
+      // Forgot password mock
+      const forgotPassword = document.getElementById('forgotPassword');
+      if (forgotPassword) {
+        forgotPassword.addEventListener('click', (e) => {
+          e.preventDefault();
+          const emailOrCpf = identifierInput.value.trim();
+          if (!emailOrCpf) {
+            if (window.showToast) window.showToast('Por favor, informe seu E-mail ou CPF primeiro.', 'warning');
+            identifierInput.focus();
+          } else {
+            if (window.showToast) window.showToast('Link de recuperação enviado com sucesso para seu e-mail cadastrado!', 'success');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

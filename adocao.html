@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Encontre seu novo melhor amigo no Programa ARCA. Veja cães e gatos disponíveis para adoção responsável na Serra/ES.">
+  <title>Adoção Responsável - Programa ARCA</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <style>
+    /* Custom styles for adoption catalog */
+    .adoption-hero {
+      padding-top: calc(var(--header-height) + var(--space-xl));
+      padding-bottom: var(--space-xl);
+      background: linear-gradient(135deg, var(--color-primary-50) 0%, #FFFFFF 100%);
+      text-align: center;
+    }
+
+    .adoption-container {
+      display: flex;
+      gap: var(--space-xl);
+      padding: var(--space-xl) 0;
+    }
+
+    .adoption-sidebar {
+      width: 280px;
+      flex-shrink: 0;
+      position: sticky;
+      top: calc(var(--header-height) + var(--space-md));
+      height: fit-content;
+    }
+
+    .adoption-main {
+      flex: 1;
+    }
+
+    .adoption-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+    }
+
+    /* Modal Gallery */
+    .modal-gallery {
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      gap: var(--space-md);
+      margin-bottom: var(--space-lg);
+    }
+
+    .modal-gallery__main img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+    }
+
+    .modal-gallery__thumbs {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .modal-gallery__thumb {
+      width: 100%;
+      height: 72px;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color var(--transition-fast);
+    }
+
+    .modal-gallery__thumb:hover,
+    .modal-gallery__thumb.active {
+      border-color: var(--color-primary);
+    }
+
+    .modal-pet-details {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      margin-bottom: var(--space-lg);
+    }
+
+    .modal-pet-tags {
+      display: flex;
+      gap: var(--space-sm);
+      margin-top: var(--space-xs);
+    }
+
+    @media (max-width: 1024px) {
+      .adoption-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .adoption-container {
+        flex-direction: column;
+      }
+      .adoption-sidebar {
+        width: 100%;
+        position: static;
+      }
+      .adoption-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav class="nav scrolled" id="navbar" aria-label="Navegação principal">
+    <div class="nav__container">
+      <a href="index.html" class="nav__logo" aria-label="Programa ARCA - Página Inicial">
+        <div class="nav__logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 10c-1.5 2-3 3.5-3 5.5a3 3 0 1 0 6 0c0-2-1.5-3.5-3-5.5z"/>
+            <circle cx="7" cy="6" r="2"/><circle cx="17" cy="6" r="2"/>
+            <circle cx="4.5" cy="11" r="1.5"/><circle cx="19.5" cy="11" r="1.5"/>
+          </svg>
+        </div>
+        Programa <span>ARCA</span>
+      </a>
+
+      <div class="nav__menu" id="navMenu" role="navigation">
+        <a href="index.html" class="nav__link">Início</a>
+        <a href="index.html#sobre" class="nav__link">Sobre</a>
+        <a href="index.html#servicos" class="nav__link">Serviços</a>
+        <a href="adocao.html" class="nav__link active">Adoção</a>
+        <a href="index.html#como-ajudar" class="nav__link">Como Ajudar</a>
+        <a href="index.html#contato" class="nav__link">Contato</a>
+      </div>
+
+      <div class="nav__actions">
+        <a href="login.html" class="btn btn-primary btn-sm" id="btnEntrar">Entrar</a>
+        <button class="nav__hamburger" id="hamburgerBtn" aria-label="Abrir menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav__menu-overlay" id="menuOverlay"></div>
+  </nav>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="adoption-hero">
+    <div class="container animate-fade-in-up">
+      <h1 style="font-size: 2.5rem; margin-bottom: var(--space-xs);">Adoção Responsável</h1>
+      <p style="color: var(--color-text-light); max-width: 600px; margin: 0 auto;">
+        Abra as portas do seu lar para um animal resgatado. Todos os pets abaixo estão clinicamente avaliados, vermifugados, vacinados e castrados.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== ADOPTION CATALOG ==================== -->
+  <div class="container">
+    <div class="adoption-container">
+      
+      <!-- FILTERS SIDEBAR -->
+      <aside class="adoption-sidebar">
+        <div class="card card--bordered">
+          <h3 style="font-size: 1.25rem; margin-bottom: var(--space-md); display: flex; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+            Filtros
+          </h3>
+
+          <form id="filterForm">
+            <!-- Espécie -->
+            <div class="form-group">
+              <label for="filterSpecies" class="form-label">Espécie</label>
+              <select id="filterSpecies" class="form-select">
+                <option value="">Todas</option>
+                <option value="Cão">Cães</option>
+                <option value="Gato">Gatos</option>
+              </select>
+            </div>
+
+            <!-- Porte -->
+            <div class="form-group">
+              <label for="filterSize" class="form-label">Porte</label>
+              <select id="filterSize" class="form-select">
+                <option value="">Todos</option>
+                <option value="Pequeno">Pequeno</option>
+                <option value="Médio">Médio</option>
+                <option value="Grande">Grande</option>
+              </select>
+            </div>
+
+            <!-- Idade -->
+            <div class="form-group">
+              <label for="filterAge" class="form-label">Idade</label>
+              <select id="filterAge" class="form-select">
+                <option value="">Todas</option>
+                <option value="Filhote">Filhote (até 1 ano)</option>
+                <option value="Adulto">Adulto (1 a 7 anos)</option>
+                <option value="Idoso">Sênior (mais de 7 anos)</option>
+              </select>
+            </div>
+
+            <!-- Sexo -->
+            <div class="form-group">
+              <label for="filterGender" class="form-label">Sexo</label>
+              <select id="filterGender" class="form-select">
+                <option value="">Todos</option>
+                <option value="Macho">Macho</option>
+                <option value="Fêmea">Fêmea</option>
+              </select>
+            </div>
+
+            <button type="button" id="clearFiltersBtn" class="btn btn-outline btn-block btn-sm">
+              Limpar Filtros
+            </button>
+          </form>
+        </div>
+      </aside>
+
+      <!-- PETS LIST -->
+      <main class="adoption-main">
+        <div class="adoption-grid" id="petGrid">
+          <!-- Mock Pet 1 -->
+          <div class="pet-card reveal" data-species="Cão" data-size="Pequeno" data-age="Adulto" data-gender="Fêmea">
+            <div class="pet-card__image-wrapper">
+              <span class="badge badge--success pet-card__badge">Adoção Aberta</span>
+              <!-- Embedded SVG Dog illustration placeholder for visual excellence -->
+              <svg class="pet-card__image" viewBox="0 0 200 150" style="background: #E3F2FD;" width="100%">
+                <rect width="100%" height="100%" fill="#E8F5E9"/>
+                <circle cx="100" cy="75" r="45" fill="#81C784"/>
+                <!-- Pet Face sketch -->
+                <circle cx="85" cy="65" r="6" fill="#1B5E20"/>
+                <circle cx="115" cy="65" r="6" fill="#1B5E20"/>
+                <path d="M90 85 q10 8 20 0" stroke="#1B5E20" stroke-width="4" fill="none"/>
+                <text x="10" y="25" fill="#2E7D32" font-family="sans-serif" font-weight="bold" font-size="14">Pipoca</text>
+              </svg>
+            </div>
+            <div class="pet-card__body">
+              <h3 class="pet-card__name">Pipoca</h3>
+              <div class="pet-card__info">
+                <div class="pet-card__info-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a5 5 0 0 0-5 5v3a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/></svg>
+                  <span>Fêmea</span>
+                </div>
+                <div class="pet-card__info-divider"></div>
+                <div class="pet-card__info-item"><span>Porte Pequeno</span></div>
+                <div class="pet-card__info-divider"></div>
+                <div class="pet-card__info-item"><span>2 Anos</span></div>
+              </div>
+              <p class="pet-card__desc">Pipoca é dócil, brincalhona e adora crianças. Excelente para apartamentos.</p>
+              <div class="pet-card__footer">
+                <button class="btn btn-primary btn-block btn-sm" onclick="showPetDetails('Pipoca', 'Cão', 'Fêmea', 'Pequeno', '2 anos', 'Dócil e sociável', 'Pipoca é extremamente ativa, adora correr no parque e se dá muito bem com outros animais de estimação. Ela foi resgatada no Parque Residencial Laranjeiras e espera uma família amorosa.')">
+                  Ver Detalhes
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mock Pet 2 -->
+          <div class="pet-card reveal" data-species="Gato" data-size="Pequeno" data-age="Filhote" data-gender="Macho">
+            <div class="pet-card__image-wrapper">
+              <span class="badge badge--success pet-card__badge">Adoção Aberta</span>
+              <svg class="pet-card__image" viewBox="0 0 200 150" style="background: #FFF9C4;" width="100%">
+                <rect width="100%" height="100%" fill="#FFF9C4"/>
+                <circle cx="100" cy="75" r="45" fill="#FBC02D"/>
+                <circle cx="85" cy="65" r="6" fill="#5F4B0B"/>
+                <circle cx="115" cy="65" r="6" fill="#5F4B0B"/>
+                <path d="M90 85 q10 8 20 0" stroke="#5F4B0B" stroke-width="4" fill="none"/>
+                <text x="10" y="25" fill="#5F4B0B" font-family="sans-serif" font-weight="bold" font-size="14">Mingau</text>
+              </svg>
+            </div>
+            <div class="pet-card__body">
+              <h3 class="pet-card__name">Mingau</h3>
+              <div class="pet-card__info">
+                <div class="pet-card__info-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a5 5 0 0 0-5 5v3a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/></svg>
+                  <span>Macho</span>
+                </div>
+                <div class="pet-card__info-divider"></div>
+                <div class="pet-card__info-item"><span>Porte Pequeno</span></div>
+                <div class="pet-card__info-divider"></div>
+                <div class="pet-card__info-item"><span>6 Meses</span></div>
+              </div>
+              <p class="pet-card__desc">Mingau é um filhotinho carente, adora colinho e dorme roncando.</p>
+              <div class="pet-card__footer">
+                <button class="btn btn-primary btn-block btn-sm" onclick="showPetDetails('Mingau', 'Gato', 'Macho', 'Pequeno', '6 meses', 'Carinhoso e brincalhão', 'Mingau foi abandonado perto da Prefeitura e acolhido pela equipe. Ele ama brinquedos de barbante e sachê de salmão.')">
+                  Ver Detalhes
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mock Pet 3 -->
+          <div class="pet-card reveal" data-species="Cão" data-size="Grande" data-age="Adulto" data-gender="Macho">
+            <div class="pet-card__image-wrapper">
+              <span class="badge badge--success pet-card__badge">Adoção Aberta</span>
+              <svg class="pet-card__image" viewBox="0 0 200 150" style="background: #E1BEE7;" width="100%">
+                <rect width="100%" height="100%" fill="#E1BEE7"/>
+                <circle cx="100" cy="75" r="45" fill="#9C27B0"/>
+                <circle cx="85" cy="65" r="6" fill="#4A148C"/>
+                <circle cx="115" cy="65" r="6" fill="#4A148C"/>
+                <path d="M90 85 q10 8 20 0" stroke="#4A148C" stroke-width="4" fill="none"/>
+                <text x="10" y="25" fill="#4A148C" font-family="sans-serif" font-weight="bold" font-size="14">Barão</text>
+              </svg>
+            </div>
+            <div class="pet-card__body">
+              <h3 class="pet-card__name">Barão</h3>
+              <div class="pet-card__info">
+                <div class="pet-card__info-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a5 5 0 0 0-5 5v3a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/></svg>
+                  <span>Macho</span>
+                </div>
+                <div class="pet-card__info-divider"></div>
+                <div class="pet-card__info-item"><span>Porte Grande</span></div>
+                <div class="pet-card__info-divider"></div>
+                <div class="pet-card__info-item"><span>3 Anos</span></div>
+              </div>
+              <p class="pet-card__desc">Barão é imponente, inteligente e ideal para casas grandes ou chácaras. Muito protetor.</p>
+              <div class="pet-card__footer">
+                <button class="btn btn-primary btn-block btn-sm" onclick="showPetDetails('Barão', 'Cão', 'Macho', 'Grande', '3 anos', 'Protetor e leal', 'Barão é dócil com a família, mas muito atento. Ele precisa de espaço para correr e gastar energia.')">
+                  Ver Detalhes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+    </div>
+  </div>
+
+  <!-- ==================== DETAIL PET MODAL ==================== -->
+  <div class="modal-overlay" id="petModal">
+    <div class="modal modal--lg">
+      <div class="modal__header">
+        <h3 class="modal__title" id="modalPetName">Pipoca</h3>
+        <button class="modal__close" data-modal-close="petModal" aria-label="Fechar modal">&times;</button>
+      </div>
+      <div class="modal__body">
+        <!-- Gallery -->
+        <div class="modal-gallery">
+          <div class="modal-gallery__main">
+            <!-- Simulated premium pet illustration -->
+            <svg id="modalPetIllustration" viewBox="0 0 400 300" style="background: #E8F5E9; border-radius: var(--radius-lg); width: 100%; height: 300px;">
+              <rect width="100%" height="100%" fill="#E8F5E9"/>
+              <circle cx="200" cy="150" r="80" fill="#81C784"/>
+              <circle cx="170" cy="130" r="10" fill="#1B5E20"/>
+              <circle cx="230" cy="130" r="10" fill="#1B5E20"/>
+              <path d="M180 170 q20 15 40 0" stroke="#1B5E20" stroke-width="6" fill="none"/>
+            </svg>
+          </div>
+          <div class="modal-gallery__thumbs">
+            <svg class="modal-gallery__thumb active" viewBox="0 0 100 80" style="background: #C8F5E5;"><circle cx="50" cy="40" r="20" fill="#00D084"/></svg>
+            <svg class="modal-gallery__thumb" viewBox="0 0 100 80" style="background: #C8F5E5;"><circle cx="50" cy="40" r="20" fill="#00A86B"/></svg>
+            <svg class="modal-gallery__thumb" viewBox="0 0 100 80" style="background: #C8F5E5;"><circle cx="50" cy="40" r="20" fill="#5B9FED"/></svg>
+          </div>
+        </div>
+
+        <!-- Info details -->
+        <div class="modal-pet-details">
+          <div class="modal-pet-tags">
+            <span class="badge badge--info" id="modalPetSpecies">Espécie: Cão</span>
+            <span class="badge badge--success" id="modalPetGender">Sexo: Fêmea</span>
+            <span class="badge badge--warning" id="modalPetSize">Porte: Pequeno</span>
+            <span class="badge badge--neutral" id="modalPetAge">Idade: 2 Anos</span>
+          </div>
+          <p style="margin-top: var(--space-md); font-weight: var(--font-weight-semibold);" id="modalPetBehavior">Temperamento: Brincalhão</p>
+          <p id="modalPetLongDesc" style="color: var(--color-text-light); line-height: 1.6;">
+            Pipoca é dócil, brincalhona e adora crianças. Excelente para apartamentos. Ela foi resgatada no Parque Residencial Laranjeiras.
+          </p>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid var(--color-border-light); margin-bottom: var(--space-lg);">
+
+        <!-- Lead Form -->
+        <form id="interestForm" novalidate>
+          <h4 style="margin-bottom: var(--space-md);">Manifestar Interesse na Adoção</h4>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="interestName" class="form-label">Seu Nome Completo <span class="required">*</span></label>
+              <input type="text" id="interestName" class="form-input" placeholder="Seu nome" required>
+              <div class="form-error"></div>
+            </div>
+            <div class="form-group">
+              <label for="interestPhone" class="form-label">Telefone de Contato <span class="required">*</span></label>
+              <input type="text" id="interestPhone" data-validate="phone" class="form-input" placeholder="(27) 99999-9999" required>
+              <div class="form-error"></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="interestMessage" class="form-label">Por que você quer adotar este animal? <span class="required">*</span></label>
+            <textarea id="interestMessage" class="form-textarea" placeholder="Conte-nos um pouco sobre você e a futura casa do pet..." required></textarea>
+            <div class="form-error"></div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block btn-lg" id="submitInterestBtn">
+            Enviar Solicitação de Interesse
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer" id="contato" style="margin-top: var(--space-4xl);">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="footer__logo">
+            <div class="footer__logo-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 10c-1.5 2-3 3.5-3 5.5a3 3 0 1 0 6 0c0-2-1.5-3.5-3-5.5z"/>
+                <circle cx="7" cy="6" r="2"/><circle cx="17" cy="6" r="2"/>
+                <circle cx="4.5" cy="11" r="1.5"/><circle cx="19.5" cy="11" r="1.5"/>
+              </svg>
+            </div>
+            Programa ARCA
+          </a>
+          <p class="footer__desc">
+            Animais Resgatados, Cuidados e Acolhidos. Um programa da Prefeitura da Serra/ES dedicado à proteção e bem-estar animal.
+          </p>
+        </div>
+        <div>
+          <h4 class="footer__heading">Links Rápidos</h4>
+          <div class="footer__links">
+            <a href="adocao.html" class="footer__link">Adoção</a>
+            <a href="resgate.html" class="footer__link">Resgate</a>
+            <a href="denuncia.html" class="footer__link">Denúncia</a>
+            <a href="cadastro.html" class="footer__link">Cadastre-se</a>
+            <a href="login.html" class="footer__link">Área do Tutor</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer__heading">Serviços</h4>
+          <div class="footer__links">
+            <a href="agendamento.html" class="footer__link">Castração Gratuita</a>
+            <a href="#" class="footer__link">Vacinação</a>
+            <a href="#" class="footer__link">Consulta Veterinária</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer__heading">Contato</h4>
+          <div class="footer__contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>(27) 3291-2000</span>
+          </div>
+          <div class="footer__contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span>arca@serra.es.gov.br</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>&copy; 2025 Programa ARCA - Prefeitura da Serra/ES. Todos os direitos reservados.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="js/utils.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    // Show Pet Details dynamically
+    function showPetDetails(name, species, gender, size, age, behavior, longDesc) {
+      document.getElementById('modalPetName').textContent = name;
+      document.getElementById('modalPetSpecies').textContent = 'Espécie: ' + species;
+      document.getElementById('modalPetGender').textContent = 'Sexo: ' + gender;
+      document.getElementById('modalPetSize').textContent = 'Porte: ' + size;
+      document.getElementById('modalPetAge').textContent = 'Idade: ' + age;
+      document.getElementById('modalPetBehavior').textContent = 'Temperamento: ' + behavior;
+      document.getElementById('modalPetLongDesc').textContent = longDesc;
+
+      // Adjust illustration colors based on species
+      const modalIllustration = document.getElementById('modalPetIllustration');
+      if (species === 'Gato') {
+        modalIllustration.style.background = '#FFF9C4';
+        modalIllustration.innerHTML = `
+          <rect width="100%" height="100%" fill="#FFF9C4"/>
+          <circle cx="200" cy="150" r="80" fill="#FBC02D"/>
+          <circle cx="170" cy="130" r="10" fill="#5F4B0B"/>
+          <circle cx="230" cy="130" r="10" fill="#5F4B0B"/>
+          <path d="M180 170 q20 15 40 0" stroke="#5F4B0B" stroke-width="6" fill="none"/>
+        `;
+      } else {
+        modalIllustration.style.background = '#E8F5E9';
+        modalIllustration.innerHTML = `
+          <rect width="100%" height="100%" fill="#E8F5E9"/>
+          <circle cx="200" cy="150" r="80" fill="#81C784"/>
+          <circle cx="170" cy="130" r="10" fill="#1B5E20"/>
+          <circle cx="230" cy="130" r="10" fill="#1B5E20"/>
+          <path d="M180 170 q20 15 40 0" stroke="#1B5E20" stroke-width="6" fill="none"/>
+        `;
+      }
+
+      window.openModal('petModal');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Restore logged user for details form
+      const loggedUser = Utils.Storage.get('arca_user');
+      if (loggedUser) {
+        document.getElementById('interestName').value = loggedUser.name || '';
+        document.getElementById('interestPhone').value = loggedUser.phone || '';
+      }
+
+      // Setup validations
+      const interestForm = document.getElementById('interestForm');
+      if (interestForm) {
+        Validation.setupFormValidation(interestForm);
+        
+        interestForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          if (Validation.validateForm(interestForm)) {
+            const submitBtn = document.getElementById('submitInterestBtn');
+            submitBtn.classList.add('loading');
+
+            setTimeout(() => {
+              submitBtn.classList.remove('loading');
+              window.closeModal('petModal');
+              interestForm.reset();
+              if (window.showToast) window.showToast('Solicitação de adoção enviada! Nossa equipe entrará em contato.', 'success');
+            }, 1800);
+          } else {
+            if (window.showToast) window.showToast('Por favor, verifique se todos os campos estão preenchidos.', 'error');
+          }
+        });
+      }
+
+      // Filter catalog logic
+      const filterSpecies = document.getElementById('filterSpecies');
+      const filterSize = document.getElementById('filterSize');
+      const filterAge = document.getElementById('filterAge');
+      const filterGender = document.getElementById('filterGender');
+      const clearFiltersBtn = document.getElementById('clearFiltersBtn');
+      const petCards = document.querySelectorAll('.pet-card');
+
+      function filterCatalog() {
+        const species = filterSpecies.value.toLowerCase();
+        const size = filterSize.value.toLowerCase();
+        const age = filterAge.value.toLowerCase();
+        const gender = filterGender.value.toLowerCase();
+
+        petCards.forEach(card => {
+          const cardSpecies = card.getAttribute('data-species').toLowerCase();
+          const cardSize = card.getAttribute('data-size').toLowerCase();
+          const cardAge = card.getAttribute('data-age').toLowerCase();
+          const cardGender = card.getAttribute('data-gender').toLowerCase();
+
+          let match = true;
+          if (species && cardSpecies !== species) match = false;
+          if (size && cardSize !== size) match = false;
+          if (age && cardAge !== age) match = false;
+          if (gender && cardGender !== gender) match = false;
+
+          card.style.display = match ? '' : 'none';
+        });
+      }
+
+      [filterSpecies, filterSize, filterAge, filterGender].forEach(el => {
+        el.addEventListener('change', filterCatalog);
+      });
+
+      if (clearFiltersBtn) {
+        clearFiltersBtn.addEventListener('click', () => {
+          filterSpecies.value = '';
+          filterSize.value = '';
+          filterAge.value = '';
+          filterGender.value = '';
+          filterCatalog();
+        });
+      }
+    });
+  </script>
+</body>
+</html>

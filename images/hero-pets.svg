@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 450" fill="none">
+  <!-- Background blob -->
+  <ellipse cx="250" cy="240" rx="220" ry="190" fill="#E8FBF2" opacity="0.6"/>
+  <ellipse cx="280" cy="260" rx="180" ry="150" fill="#C8F5E5" opacity="0.4"/>
+  
+  <!-- Ground -->
+  <ellipse cx="250" cy="390" rx="200" ry="20" fill="#C8F5E5"/>
+  
+  <!-- Dog body -->
+  <g transform="translate(120, 180)">
+    <!-- Body -->
+    <ellipse cx="80" cy="120" rx="65" ry="50" fill="#D4956B"/>
+    <!-- Head -->
+    <circle cx="30" cy="80" r="40" fill="#D4956B"/>
+    <!-- Ear left -->
+    <ellipse cx="5" cy="50" rx="15" ry="25" fill="#B87D5A" transform="rotate(-15 5 50)"/>
+    <!-- Ear right -->
+    <ellipse cx="50" cy="45" rx="15" ry="25" fill="#B87D5A" transform="rotate(15 50 45)"/>
+    <!-- Eye -->
+    <circle cx="20" cy="75" r="5" fill="#333"/>
+    <circle cx="18" cy="73" r="2" fill="#FFF"/>
+    <!-- Eye right -->
+    <circle cx="40" cy="75" r="5" fill="#333"/>
+    <circle cx="38" cy="73" r="2" fill="#FFF"/>
+    <!-- Nose -->
+    <ellipse cx="30" cy="90" rx="6" ry="4" fill="#333"/>
+    <!-- Mouth -->
+    <path d="M24 94 Q30 100 36 94" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <!-- Tongue -->
+    <path d="M28 96 Q30 106 32 96" fill="#FF8B8B" stroke="none"/>
+    
+    <!-- Front legs -->
+    <rect x="30" y="150" width="18" height="50" rx="9" fill="#D4956B"/>
+    <rect x="65" y="150" width="18" height="50" rx="9" fill="#C88A5C"/>
+    
+    <!-- Back legs -->
+    <rect x="100" y="145" width="18" height="55" rx="9" fill="#D4956B"/>
+    <rect x="125" y="148" width="18" height="52" rx="9" fill="#C88A5C"/>
+    
+    <!-- Paws -->
+    <ellipse cx="39" cy="200" rx="12" ry="6" fill="#C88A5C"/>
+    <ellipse cx="74" cy="200" rx="12" ry="6" fill="#B87D5A"/>
+    <ellipse cx="109" cy="200" rx="12" ry="6" fill="#C88A5C"/>
+    <ellipse cx="134" cy="200" rx="12" ry="6" fill="#B87D5A"/>
+    
+    <!-- Tail -->
+    <path d="M145 110 Q170 80 160 60" stroke="#D4956B" stroke-width="14" fill="none" stroke-linecap="round"/>
+    
+    <!-- Collar -->
+    <path d="M10 105 Q30 115 55 105" stroke="#00D084" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <circle cx="30" cy="112" r="5" fill="#FFD700"/>
+  </g>
+  
+  <!-- Cat -->
+  <g transform="translate(300, 200)">
+    <!-- Body -->
+    <ellipse cx="50" cy="110" rx="40" ry="45" fill="#8B8B8B"/>
+    <!-- Head -->
+    <circle cx="50" cy="55" r="35" fill="#8B8B8B"/>
+    <!-- Ears -->
+    <polygon points="25,30 20,0 40,20" fill="#8B8B8B"/>
+    <polygon points="75,30 80,0 60,20" fill="#8B8B8B"/>
+    <!-- Inner ears -->
+    <polygon points="27,28 23,6 38,22" fill="#FFB5B5"/>
+    <polygon points="73,28 77,6 62,22" fill="#FFB5B5"/>
+    
+    <!-- Eyes -->
+    <ellipse cx="38" cy="50" rx="6" ry="7" fill="#7BC67E"/>
+    <ellipse cx="62" cy="50" rx="6" ry="7" fill="#7BC67E"/>
+    <ellipse cx="38" cy="50" rx="3" ry="7" fill="#333"/>
+    <ellipse cx="62" cy="50" rx="3" ry="7" fill="#333"/>
+    <circle cx="36" cy="47" r="2" fill="#FFF"/>
+    <circle cx="60" cy="47" r="2" fill="#FFF"/>
+    
+    <!-- Nose -->
+    <polygon points="47,60 53,60 50,64" fill="#FFB5B5"/>
+    
+    <!-- Mouth -->
+    <path d="M45 65 Q50 69 55 65" stroke="#666" stroke-width="1.5" fill="none"/>
+    
+    <!-- Whiskers -->
+    <line x1="15" y1="58" x2="35" y2="60" stroke="#AAA" stroke-width="1"/>
+    <line x1="15" y1="63" x2="35" y2="63" stroke="#AAA" stroke-width="1"/>
+    <line x1="65" y1="60" x2="85" y2="58" stroke="#AAA" stroke-width="1"/>
+    <line x1="65" y1="63" x2="85" y2="63" stroke="#AAA" stroke-width="1"/>
+    
+    <!-- Front legs -->
+    <rect x="30" y="140" width="15" height="45" rx="7" fill="#8B8B8B"/>
+    <rect x="55" y="140" width="15" height="45" rx="7" fill="#7A7A7A"/>
+    
+    <!-- Paws -->
+    <ellipse cx="37" cy="185" rx="10" ry="5" fill="#7A7A7A"/>
+    <ellipse cx="62" cy="185" rx="10" ry="5" fill="#6E6E6E"/>
+    
+    <!-- Tail -->
+    <path d="M85 120 Q110 90 105 50 Q103 40 95 45" stroke="#8B8B8B" stroke-width="10" fill="none" stroke-linecap="round"/>
+    
+    <!-- Collar -->
+    <path d="M20 80 Q50 90 80 80" stroke="#5B9FED" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <circle cx="50" cy="87" r="4" fill="#FFD700"/>
+  </g>
+  
+  <!-- Hearts -->
+  <g fill="#FF6B6B" opacity="0.7">
+    <path d="M260 140 C260 135, 265 130, 270 135 C275 130, 280 135, 280 140 C280 148, 270 155, 270 155 C270 155, 260 148, 260 140Z" transform="scale(0.8)"/>
+    <path d="M360 100 C360 95, 365 90, 370 95 C375 90, 380 95, 380 100 C380 108, 370 115, 370 115 C370 115, 360 108, 360 100Z" transform="scale(0.6) translate(100, 50)"/>
+    <path d="M160 160 C160 155, 165 150, 170 155 C175 150, 180 155, 180 160 C180 168, 170 175, 170 175 C170 175, 160 168, 160 160Z" transform="scale(0.5) translate(-50, -20)"/>
+  </g>
+  
+  <!-- Stars/sparkles -->
+  <g fill="#FFD700" opacity="0.6">
+    <path d="M150 120 l3 6 6 1-4 4 1 7-6-3-6 3 1-7-4-4 6-1z" transform="scale(0.7)"/>
+    <path d="M400 160 l3 6 6 1-4 4 1 7-6-3-6 3 1-7-4-4 6-1z" transform="scale(0.5)"/>
+    <path d="M320 80 l3 6 6 1-4 4 1 7-6-3-6 3 1-7-4-4 6-1z" transform="scale(0.6)"/>
+  </g>
+  
+  <!-- ARCA text badge -->
+  <g transform="translate(180, 15)">
+    <rect x="0" y="0" width="140" height="36" rx="18" fill="#00D084"/>
+    <text x="70" y="24" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-weight="700" font-size="16">🐾 ARCA</text>
+  </g>
+</svg>
