@@ -176,12 +176,18 @@
 
 
 /* ============ CARDS ============ */
-.card {
+/* Shared surface styles for card-like components to avoid redundancy */
+.card,
+.service-card,
+.pet-card {
   background: var(--color-bg);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+}
+
+.card {
   padding: var(--space-xl);
-  transition: box-shadow var(--transition-base), transform var(--transition-base);
 }
 
 .card:hover {
@@ -207,12 +213,9 @@
 .service-card {
   text-align: center;
   padding: var(--space-xl);
-  background: var(--color-bg);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  transition: all var(--transition-base);
   position: relative;
   overflow: hidden;
+  transition: none; /* uses shared transition; override kept to avoid duplicate declarations */
 }
 
 .service-card::before {
@@ -306,13 +309,9 @@
 
 /* Pet Card */
 .pet-card {
-  background: var(--color-bg);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
   overflow: hidden;
-  transition: all var(--transition-base);
+  transition: none; /* uses shared transition */
 }
-
 .pet-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
@@ -472,8 +471,6 @@
   left: 14px;
   top: 50%;
   transform: translateY(-50%);
-  width: 18px;
-  height: 18px;
   color: var(--color-text-muted);
   pointer-events: none;
 }
@@ -483,17 +480,39 @@
   right: 8px;
   top: 50%;
   transform: translateY(-50%);
-  padding: 6px;
+
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
   color: var(--color-text-muted);
   cursor: pointer;
+
+  border: none;
+  background: transparent;
+
   border-radius: var(--radius-sm);
-  transition: color var(--transition-fast);
+
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast);
 }
 
 .form-input-wrapper .input-action:hover {
   color: var(--color-text);
 }
+.form-input-wrapper .input-icon svg,
+.form-input-wrapper .input-action svg {
+  width: 18px;
+  height: 18px;
 
+  display: block;
+}
 /* Validation States */
 .form-input.is-valid,
 .form-select.is-valid {
@@ -889,32 +908,18 @@
   transition: background var(--transition-base);
 }
 
-/* Active Step */
-.stepper__step.active .stepper__circle {
-  border-color: var(--color-primary);
-  background: var(--color-primary);
-  color: #FFFFFF;
-}
-
-.stepper__step.active .stepper__label {
-  color: var(--color-primary);
-}
-
-/* Completed Step */
+/* Active / Completed Step */
+.stepper__step.active .stepper__circle,
 .stepper__step.completed .stepper__circle {
   border-color: var(--color-primary);
   background: var(--color-primary);
   color: #FFFFFF;
 }
 
-.stepper__step.completed .stepper__label {
-  color: var(--color-text);
-}
+.stepper__step.active .stepper__label { color: var(--color-primary); }
+.stepper__step.completed .stepper__label { color: var(--color-text); }
 
-.stepper__step.completed + .stepper__line {
-  background: var(--color-primary);
-}
-
+.stepper__step.completed + .stepper__line,
 .stepper__line.completed {
   background: var(--color-primary);
 }
