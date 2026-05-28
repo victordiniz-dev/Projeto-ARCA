@@ -18,37 +18,42 @@
 
   <style>
     body {
-      background: linear-gradient(135deg, var(--color-primary-50) 0%, #FFFFFF 50%, var(--color-secondary-light) 100%);
+      background: #F4F7F6;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      overflow-x: hidden;
+      overflow-y: auto;
     }
 
     .auth-container {
       flex: 1;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
-      padding: var(--space-xl) var(--space-md);
+      padding: 40px var(--space-md);
       position: relative;
+      width: 100%; /* Garante que o container ocupe toda a largura */
     }
 
     .auth-card {
       background: #FFFFFF;
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-xl);
+      border-radius: var(--radius-sm);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
       width: 100%;
       max-width: 680px;
-      padding: var(--space-2xl);
+      min-width: 0; /* Evita que o flexbox impeça o encolhimento */
+      padding: var(--space-xl);
       border: 1px solid var(--color-border-light);
       position: relative;
       z-index: 1;
       animation: scaleIn 0.4s ease;
+      margin-bottom: 40px;
     }
 
     .auth-header {
       text-align: center;
-      margin-bottom: var(--space-xl);
+      margin-bottom: var(--space-lg); /* Reduzi de xl para lg */
     }
 
     .auth-logo {
@@ -90,8 +95,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: var(--space-2xl);
+      margin-bottom: var(--space-xl); /* Reduzi de 2xl para xl */
       position: relative;
+      flex-wrap: wrap; /* Permite quebrar em telas muito pequenas */
+      gap: var(--space-sm);
     }
 
     .stepper__step {
@@ -178,19 +185,51 @@
       flex: 1;
     }
 
-    .w-30 {
-      flex: 0 0 30% !important;
-    }
-
-    .w-70 {
-      flex: 0 0 70% !important;
-    }
-
     .back-to-login {
       text-align: center;
       font-size: var(--font-size-sm);
       color: var(--color-text-light);
-      margin-top: var(--space-xl);
+      margin-top: var(--space-lg); /* Reduzi de xl para lg */
+    }
+
+    /* Responsividade para telas menores */
+    @media (max-height: 800px) {
+      .auth-container {
+        padding: 20px var(--space-md);
+      }
+      .auth-card {
+        padding: var(--space-lg);
+      }
+      .auth-header {
+        margin-bottom: var(--space-md);
+      }
+      .stepper {
+        margin-bottom: var(--space-lg);
+      }
+    }
+
+    @media (max-width: 576px) {
+      .auth-container {
+        padding: 20px 12px; /* Reduzi ainda mais o padding lateral no mobile */
+      }
+      .auth-card {
+        padding: var(--space-md); /* Menos padding interno para sobrar espaço pros campos */
+      }
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+      .form-row .form-group {
+        flex: 0 0 100% !important;
+        max-width: 100%;
+      }
+      .stepper__label {
+        display: none; /* Esconde labels do stepper no mobile para não quebrar layout */
+      }
+      .stepper__line {
+        min-width: 20px;
+        margin: 0 var(--space-sm);
+      }
     }
   </style>
 </head>
@@ -283,12 +322,12 @@
         <!-- ETAPA 2: ENDEREÇO -->
         <div class="form-step" id="step2">
           <div class="form-row">
-            <div class="form-group w-30">
+            <div class="form-group" style="flex: 0 0 120px;">
               <label for="cep" class="form-label">CEP <span class="required">*</span></label>
               <input type="text" id="cep" data-validate="cep" class="form-input" placeholder="00000-000" required>
               <div class="form-error"></div>
             </div>
-            <div class="form-group w-70">
+            <div class="form-group">
               <label for="rua" class="form-label">Rua / Logradouro <span class="required">*</span></label>
               <input type="text" id="rua" class="form-input" placeholder="Nome da rua" required>
               <div class="form-error"></div>
@@ -296,12 +335,12 @@
           </div>
 
           <div class="form-row">
-            <div class="form-group w-30">
+            <div class="form-group" style="flex: 0 0 100px;">
               <label for="numero" class="form-label">Número <span class="required">*</span></label>
               <input type="text" id="numero" class="form-input" placeholder="Nº" required>
               <div class="form-error"></div>
             </div>
-            <div class="form-group w-70">
+            <div class="form-group">
               <label for="complemento" class="form-label">Complemento</label>
               <input type="text" id="complemento" class="form-input" placeholder="Apto, Bloco, etc.">
             </div>
@@ -313,12 +352,12 @@
               <input type="text" id="bairro" class="form-input" placeholder="Seu bairro" required>
               <div class="form-error"></div>
             </div>
-            <div class="form-group w-70">
+            <div class="form-group">
               <label for="cidade" class="form-label">Cidade <span class="required">*</span></label>
               <input type="text" id="cidade" class="form-input" value="Serra" required>
               <div class="form-error"></div>
             </div>
-            <div class="form-group w-30">
+            <div class="form-group" style="flex: 0 0 80px;">
               <label for="estado" class="form-label">Estado <span class="required">*</span></label>
               <input type="text" id="estado" class="form-input" value="ES" maxlength="2" required>
               <div class="form-error"></div>
