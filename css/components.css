@@ -469,7 +469,7 @@
 .form-input-wrapper .input-icon {
   position: absolute;
   left: 14px;
-  top: 50%;
+  top: 26px; /* Centrado em relação ao input de 52px de altura */
   transform: translateY(-50%);
   color: var(--color-text-muted);
   pointer-events: none;
@@ -478,7 +478,7 @@
 .form-input-wrapper .input-action {
   position: absolute;
   right: 8px;
-  top: 50%;
+  top: 26px; /* Centrado em relação ao input de 52px de altura */
   transform: translateY(-50%);
 
   width: 36px;
