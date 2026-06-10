@@ -6,156 +6,762 @@
   <meta name="description" content="Encontre seu novo melhor amigo no Programa ARCA. Veja cães e gatos disponíveis para adoção responsável na Serra/ES.">
   <title>Adoção Responsável - Programa ARCA</title>
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Encontre seu novo melhor amigo no Programa ARCA. Veja cães e gatos disponíveis para adoção responsável na Serra/ES.">
+  <title>Adoção Responsável - Programa ARCA</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/responsive.css">
 
   <style>
-    /* Custom styles for adoption catalog */
+   
+    :root {
+      --green:       #1A7F5A;
+      --green-light: #E8F5EE;
+      --green-mid:   #2EA87A;
+      --ink:         #0F1F17;
+      --ink-soft:    #3D5047;
+      --muted:       #8A9E93;
+      --border:      #D9E8DE;
+      --surface:     #F4FAF6;
+      --white:       #FFFFFF;
+      --radius-sm:   8px;
+      --radius-md:   14px;
+      --radius-lg:   20px;
+      --shadow-card: 0 2px 12px rgba(15,31,23,.07);
+      --shadow-hover:0 8px 28px rgba(15,31,23,.13);
+      --font: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font);
+      background: var(--surface);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    html,
+body{
+  width:100%;
+  overflow-x:hidden;
+}
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ===================== SVG GLOBAL ===================== */
+    /* Ícones pequenos de UI: 20x20 por padrão */
+    svg { flex-shrink: 0; }
+
+    /* Garante que SVGs de ícone não explodam */
+    .nav svg,
+    .pet-card__info svg,
+    .footer__contact-item svg,
+    .adoption-sidebar svg,
+    .btn svg { width: 18px; height: 18px; }
+
+   
+    .nav {
+  position: sticky;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  min-width: 100%;
+
+  z-index: 100;
+
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 40px;
+  height: 64px;
+
+  box-sizing: border-box;
+}
+
+   .nav__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-weight: 800;
+  font-size: 1.1rem;
+
+  color: var(--ink);
+
+  flex-shrink: 0;
+
+  min-width: fit-content;
+  margin-right: 32px;
+}
+
+    .nav__logo span { color: var(--green); }
+
+    .nav__logo-icon {
+      width: 34px;
+      height: 34px;
+      background: var(--green-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav__logo-icon svg { width: 18px; height: 18px; stroke: var(--green); }
+
+    .nav__menu {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-right: auto;
+    }
+
+    .nav__link {
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      font-size: .9rem;
+      font-weight: 500;
+      color: var(--ink-soft);
+      transition: background .15s, color .15s;
+    }
+
+    .nav__link:hover { background: var(--surface); color: var(--ink); }
+    .nav__link.active { background: var(--green-light); color: var(--green); font-weight: 600; }
+
+    .nav__actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+    }
+
+    .nav__hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav__hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--ink);
+      border-radius: 2px;
+    }
+
+    /* ===================== BOTÕES ===================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      font-family: var(--font);
+      font-weight: 600;
+      font-size: .875rem;
+      border-radius: var(--radius-sm);
+      padding: 9px 18px;
+      border: none;
+      cursor: pointer;
+      transition: background .15s, transform .1s, box-shadow .15s;
+      white-space: nowrap;
+    }
+
+    .btn:active { transform: scale(.97); }
+
+    .btn-primary { background: var(--green); color: var(--white); }
+    .btn-primary:hover { background: var(--green-mid); }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--border);
+      color: var(--ink-soft);
+    }
+    .btn-outline:hover { border-color: var(--green); color: var(--green); background: var(--green-light); }
+
+    .btn-block { width: 100%; }
+    .btn-sm { padding: 7px 14px; font-size: .82rem; }
+    .btn-lg { padding: 13px 24px; font-size: 1rem; }
+
+    /* ===================== HERO ===================== */
     .adoption-hero {
-      padding-top: calc(var(--header-height) + var(--space-xl));
-      padding-bottom: var(--space-xl);
-      background: linear-gradient(135deg, var(--color-primary-50) 0%, #FFFFFF 100%);
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 56px 40px 52px;
       text-align: center;
     }
 
+    .adoption-hero h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -.02em;
+      margin-bottom: 14px;
+    }
+
+    .adoption-hero h1 span { color: var(--green); }
+
+    .adoption-hero p {
+      max-width: 540px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    /* ===================== LAYOUT ===================== */
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+
     .adoption-container {
       display: flex;
-      gap: var(--space-xl);
-      padding: var(--space-xl) 0;
+      gap: 28px;
+      padding: 40px 0 80px;
+      align-items: flex-start;
     }
 
+    /* ===================== SIDEBAR ===================== */
     .adoption-sidebar {
-      width: 280px;
+      width: 256px;
       flex-shrink: 0;
       position: sticky;
-      top: calc(var(--header-height) + var(--space-md));
-      height: fit-content;
+      top: 80px;
     }
 
-    .adoption-main {
-      flex: 1;
+    .sidebar-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
     }
+
+    .sidebar-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: 6px;
+    }
+
+    .form-group { margin-bottom: 16px; }
+
+    .form-select {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font);
+      font-size: .9rem;
+      color: var(--ink);
+      background: var(--white);
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238A9E93' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      cursor: pointer;
+      transition: border-color .15s;
+    }
+
+    .form-select:focus {
+      outline: none;
+      border-color: var(--green);
+    }
+
+    /* ===================== GRID ===================== */
+    .adoption-main { flex: 1; min-width: 0; }
 
     .adoption-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-lg);
+      grid-template-columns: repeat(auto-fill, minmax(268px, 1fr));
+      gap: 20px;
     }
 
-    /* Modal Gallery */
-    .modal-gallery {
-      display: grid;
-      grid-template-columns: 3fr 1fr;
-      gap: var(--space-md);
-      margin-bottom: var(--space-lg);
-    }
-
-    .modal-gallery__main img {
-      width: 100%;
-      height: 320px;
-      object-fit: cover;
+    /* ===================== PET CARD ===================== */
+    .pet-card {
+      background: var(--white);
+      border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-    }
-
-    .modal-gallery__thumbs {
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      gap: var(--space-sm);
+      transition: box-shadow .2s, transform .2s;
     }
 
-    .modal-gallery__thumb {
+    .pet-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* IMAGEM — altura fixa, SVG contido */
+    .pet-card__image-wrapper {
+      position: relative;
+      height: 190px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .pet-card__image-wrapper svg {
+      position: absolute;
+      inset: 0;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .pet-card__badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 1;
+      background: var(--green);
+      color: var(--white);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      padding: 5px 12px;
+      border-radius: 999px;
+    }
+
+    .pet-card__body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .pet-card__name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+
+    .pet-card__info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .pet-card__pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: .78rem;
+      font-weight: 500;
+      color: var(--ink-soft);
+    }
+
+    .pet-card__desc {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.65;
+      flex: 1;
+      margin-bottom: 18px;
+    }
+
+    /* ===================== MODAL ===================== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15,31,23,.45);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .modal-overlay.active { display: flex; }
+
+    .modal {
+      background: var(--white);
+      border-radius: var(--radius-lg);
       width: 100%;
-      height: 72px;
-      object-fit: cover;
-      border-radius: var(--radius-md);
+      max-width: 780px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 28px 0;
+    }
+
+    .modal__title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .modal__close {
+      background: var(--surface);
+      border: none;
+      border-radius: var(--radius-sm);
+      width: 34px;
+      height: 34px;
+      font-size: 1.2rem;
       cursor: pointer;
-      border: 2px solid transparent;
-      transition: border-color var(--transition-fast);
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .15s, color .15s;
     }
 
-    .modal-gallery__thumb:hover,
-    .modal-gallery__thumb.active {
-      border-color: var(--color-primary);
+    .modal__close:hover { background: #FFE8E8; color: #C0392B; }
+
+    .modal__body { padding: 20px 28px 28px; }
+
+    /* Imagem modal */
+    .modal-img-wrap {
+      height: 260px;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      margin-bottom: 20px;
+      position: relative;
     }
 
-    .modal-pet-details {
+    .modal-img-wrap svg {
+      position: absolute;
+      inset: 0;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    /* Tags modal */
+    .modal-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .tag {
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 600;
+    }
+
+    .tag-green { background: var(--green-light); color: var(--green); }
+    .tag-blue  { background: #E8F0FF; color: #2756C5; }
+    .tag-amber { background: #FFF4E0; color: #A05D00; }
+    .tag-gray  { background: var(--surface); color: var(--ink-soft); border: 1px solid var(--border); }
+
+    .modal-behavior {
+      font-size: .95rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .modal-desc {
+      font-size: .9rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    /* Formulário modal */
+    .modal-form-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 16px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font);
+      font-size: .9rem;
+      color: var(--ink);
+      background: var(--white);
+      transition: border-color .15s;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus { outline: none; border-color: var(--green); }
+
+    .form-textarea { min-height: 110px; resize: vertical; }
+
+    .required { color: #E53E3E; }
+
+    .form-error {
+      font-size: .78rem;
+      color: #E53E3E;
+      margin-top: 4px;
+      min-height: 16px;
+    }
+
+    /* ===================== FOOTER ===================== */
+    .footer {
+      background: var(--ink);
+      color: #C8D8CC;
+      padding: 56px 40px 36px;
+      margin-top: 0;
+    }
+
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      max-width: 1160px;
+      margin: 0 auto 40px;
+    }
+
+    .footer__logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--white);
+      margin-bottom: 14px;
+    }
+
+    .footer__logo span { color: var(--green-mid); }
+
+    .footer__logo-icon {
+      width: 32px;
+      height: 32px;
+      background: rgba(46,168,122,.2);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* SVG do logo no footer: tamanho fixo */
+    .footer__logo-icon svg { width: 17px !important; height: 17px !important; stroke: var(--green-mid); }
+
+    .footer__desc {
+      font-size: .85rem;
+      line-height: 1.75;
+      color: #7B9B85;
+    }
+
+    .footer__heading {
+      font-size: .78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .footer__links { display: flex; flex-direction: column; gap: 10px; }
+
+    .footer__link {
+      font-size: .88rem;
+      color: #7B9B85;
+      transition: color .15s;
+    }
+
+    .footer__link:hover { color: var(--white); }
+
+    .footer__contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .88rem;
+      margin-bottom: 10px;
+      color: #7B9B85;
+    }
+
+    /* SVGs de contato no footer */
+    .footer__contact-item svg { width: 17px !important; height: 17px !important; flex-shrink: 0; }
+
+    .footer__bottom {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      font-size: .8rem;
+      color: #4D6B56;
+      text-align: center;
+    }
+
+    /* ===================== TOAST ===================== */
+    .toast-container {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 9999;
       display: flex;
       flex-direction: column;
-      gap: var(--space-xs);
-      margin-bottom: var(--space-lg);
+      gap: 10px;
     }
 
-    .modal-pet-tags {
-      display: flex;
-      gap: var(--space-sm);
-      margin-top: var(--space-xs);
-    }
-
+    /* ===================== RESPONSIVO ===================== */
     @media (max-width: 1024px) {
-      .adoption-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .footer__grid { grid-template-columns: 1fr 1fr; }
     }
 
-    @media (max-width: 768px) {
-      .adoption-container {
-        flex-direction: column;
-      }
-      .adoption-sidebar {
-        width: 100%;
-        position: static;
-      }
-      .adoption-grid {
-        grid-template-columns: 1fr;
-      }
+    @media (max-width: 860px) {
+      .adoption-container { flex-direction: column; }
+      .adoption-sidebar { width: 100%; position: static; }
+    }
+
+    @media (max-width: 640px) {
+      .nav { padding: 0 20px; }
+      .nav__menu { display: none; }
+      .nav__hamburger { display: flex; }
+      .adoption-hero { padding: 40px 20px; }
+      .adoption-hero h1 { font-size: 1.8rem; }
+      .adoption-container { padding: 24px 0 60px; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer { padding: 40px 20px 28px; }
+      .footer__grid { grid-template-columns: 1fr; gap: 28px; }
+      .modal__body, .modal__header { padding-left: 18px; padding-right: 18px; }
     }
   </style>
 </head>
+
+<script>
+
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const navMenu = document.getElementById('navMenu');
+
+hamburgerBtn.addEventListener('click', () => {
+  navMenu.classList.toggle('active');
+});
+
+</script>
 <body>
 
-  <!-- ==================== NAVBAR ==================== -->
-  <nav class="nav scrolled" id="navbar" aria-label="Navegação principal">
-    <div class="nav__container">
-      <a href="index.html" class="nav__logo" aria-label="Programa ARCA - Página Inicial">
+  <header class="header">
+  <nav class="nav" id="navbar">
+
+    <div class="container nav__container">
+
+     
+      <a href="index.html" class="nav__logo">
         <div class="nav__logo-icon">
+
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M12 10c-1.5 2-3 3.5-3 5.5a3 3 0 1 0 6 0c0-2-1.5-3.5-3-5.5z"/>
-            <circle cx="7" cy="6" r="2"/><circle cx="17" cy="6" r="2"/>
-            <circle cx="4.5" cy="11" r="1.5"/><circle cx="19.5" cy="11" r="1.5"/>
+            <circle cx="7" cy="6" r="2"/>
+            <circle cx="17" cy="6" r="2"/>
+            <circle cx="4.5" cy="11" r="1.5"/>
+            <circle cx="19.5" cy="11" r="1.5"/>
           </svg>
+
         </div>
+
         Programa <span>ARCA</span>
       </a>
 
-      <div class="nav__menu" id="navMenu" role="navigation">
-        <a href="index.html" class="nav__link">Início</a>
-        <a href="index.html#sobre" class="nav__link">Sobre</a>
-        <a href="index.html#servicos" class="nav__link">Serviços</a>
-        <a href="adocao.html" class="nav__link active">Adoção</a>
-        <a href="index.html#como-ajudar" class="nav__link">Como Ajudar</a>
-        <a href="index.html#contato" class="nav__link">Contato</a>
+      <!-- Menu -->
+      <div class="nav__menu" id="navMenu">
+
+        <a href="index.html" class="nav__link">
+          Início
+        </a>
+
+        <a href="index.html#sobre" class="nav__link">
+          Sobre
+        </a>
+
+        <a href="index.html#servicos" class="nav__link">
+          Serviços
+        </a>
+
+        <a href="adocao.html" class="nav__link active">
+          Adoção
+        </a>
+
+        <a href="index.html#como-ajudar" class="nav__link">
+          Como ajudar
+        </a>
+
+        <a href="index.html#contato" class="nav__link">
+          Contato
+        </a>
+
       </div>
 
+      <!-- Actions -->
       <div class="nav__actions">
-        <a href="login.html" class="btn btn-primary btn-sm" id="btnEntrar">Entrar</a>
-        <button class="nav__hamburger" id="hamburgerBtn" aria-label="Abrir menu" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-    </div>
-    <div class="nav__menu-overlay" id="menuOverlay"></div>
-  </nav>
 
-  <!-- ==================== HERO ==================== -->
+        <a href="index.html" class="btn btn-outline btn-sm">
+          Voltar
+        </a>
+
+        <a href="login.html" class="btn btn-primary btn-sm">
+          Entrar
+        </a>
+
+        <!-- Hamburger -->
+        <button class="nav__hamburger" id="hamburgerBtn">
+
+          <span></span>
+          <span></span>
+          <span></span>
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </nav>
+</header>
+
   <section class="adoption-hero">
     <div class="container animate-fade-in-up">
       <h1 style="font-size: 2.5rem; margin-bottom: var(--space-xs);">Adoção Responsável</h1>
@@ -165,20 +771,16 @@
     </div>
   </section>
 
-  <!-- ==================== ADOPTION CATALOG ==================== -->
   <div class="container">
     <div class="adoption-container">
-      
-      <!-- FILTERS SIDEBAR -->
+
       <aside class="adoption-sidebar">
         <div class="card card--bordered">
           <h3 style="font-size: 1.25rem; margin-bottom: var(--space-md); display: flex; align-items: center; gap: 8px;">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
             Filtros
           </h3>
-
           <form id="filterForm">
-            <!-- Espécie -->
             <div class="form-group">
               <label for="filterSpecies" class="form-label">Espécie</label>
               <select id="filterSpecies" class="form-select">
@@ -187,8 +789,6 @@
                 <option value="Gato">Gatos</option>
               </select>
             </div>
-
-            <!-- Porte -->
             <div class="form-group">
               <label for="filterSize" class="form-label">Porte</label>
               <select id="filterSize" class="form-select">
@@ -198,8 +798,6 @@
                 <option value="Grande">Grande</option>
               </select>
             </div>
-
-            <!-- Idade -->
             <div class="form-group">
               <label for="filterAge" class="form-label">Idade</label>
               <select id="filterAge" class="form-select">
@@ -209,8 +807,6 @@
                 <option value="Idoso">Sênior (mais de 7 anos)</option>
               </select>
             </div>
-
-            <!-- Sexo -->
             <div class="form-group">
               <label for="filterGender" class="form-label">Sexo</label>
               <select id="filterGender" class="form-select">
@@ -219,26 +815,24 @@
                 <option value="Fêmea">Fêmea</option>
               </select>
             </div>
-
-            <button type="button" id="clearFiltersBtn" class="btn btn-outline btn-block btn-sm">
-              Limpar Filtros
-            </button>
+            <button type="button" id="clearFiltersBtn" class="btn btn-outline btn-block btn-sm">Limpar Filtros</button>
           </form>
         </div>
       </aside>
 
-      <!-- PETS LIST -->
       <main class="adoption-main">
         <div class="adoption-grid" id="petGrid">
-          <!-- Mock Pet 1 -->
+
+          <!-- Pet 1 - Pipoca -->
           <div class="pet-card reveal" data-species="Cão" data-size="Pequeno" data-age="Adulto" data-gender="Fêmea">
-            <div class="pet-card__image-wrapper">
+            <div class="pet-card__image-wrapper" style="overflow:hidden; height:180px; display:block; position:relative;">
               <span class="badge badge--success pet-card__badge">Adoção Aberta</span>
-              <!-- Embedded SVG Dog illustration placeholder for visual excellence -->
-              <svg class="pet-card__image" viewBox="0 0 200 150" style="background: #E3F2FD;" width="100%">
-                <rect width="100%" height="100%" fill="#E8F5E9"/>
+              <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg"
+                   width="100%" height="180"
+                   preserveAspectRatio="xMidYMid slice"
+                   style="display:block;">
+                <rect width="200" height="150" fill="#E8F5E9"/>
                 <circle cx="100" cy="75" r="45" fill="#81C784"/>
-                <!-- Pet Face sketch -->
                 <circle cx="85" cy="65" r="6" fill="#1B5E20"/>
                 <circle cx="115" cy="65" r="6" fill="#1B5E20"/>
                 <path d="M90 85 q10 8 20 0" stroke="#1B5E20" stroke-width="4" fill="none"/>
@@ -249,7 +843,7 @@
               <h3 class="pet-card__name">Pipoca</h3>
               <div class="pet-card__info">
                 <div class="pet-card__info-item">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a5 5 0 0 0-5 5v3a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 2a5 5 0 0 0-5 5v3a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/></svg>
                   <span>Fêmea</span>
                 </div>
                 <div class="pet-card__info-divider"></div>
@@ -259,19 +853,20 @@
               </div>
               <p class="pet-card__desc">Pipoca é dócil, brincalhona e adora crianças. Excelente para apartamentos.</p>
               <div class="pet-card__footer">
-                <button class="btn btn-primary btn-block btn-sm" onclick="showPetDetails('Pipoca', 'Cão', 'Fêmea', 'Pequeno', '2 anos', 'Dócil e sociável', 'Pipoca é extremamente ativa, adora correr no parque e se dá muito bem com outros animais de estimação. Ela foi resgatada no Parque Residencial Laranjeiras e espera uma família amorosa.')">
-                  Ver Detalhes
-                </button>
+                <button class="btn btn-primary btn-block btn-sm" onclick="showPetDetails('Pipoca','Cão','Fêmea','Pequeno','2 anos','Dócil e sociável','Pipoca é extremamente ativa, adora correr no parque e se dá muito bem com outros animais. Ela foi resgatada no Parque Residencial Laranjeiras e espera uma família amorosa.')">Ver Detalhes</button>
               </div>
             </div>
           </div>
 
-          <!-- Mock Pet 2 -->
+          <!-- Pet 2 - Mingau -->
           <div class="pet-card reveal" data-species="Gato" data-size="Pequeno" data-age="Filhote" data-gender="Macho">
-            <div class="pet-card__image-wrapper">
+            <div class="pet-card__image-wrapper" style="overflow:hidden; height:180px; display:block; position:relative;">
               <span class="badge badge--success pet-card__badge">Adoção Aberta</span>
-              <svg class="pet-card__image" viewBox="0 0 200 150" style="background: #FFF9C4;" width="100%">
-                <rect width="100%" height="100%" fill="#FFF9C4"/>
+              <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg"
+                   width="100%" height="180"
+                   preserveAspectRatio="xMidYMid slice"
+                   style="display:block;">
+                <rect width="200" height="150" fill="#FFF9C4"/>
                 <circle cx="100" cy="75" r="45" fill="#FBC02D"/>
                 <circle cx="85" cy="65" r="6" fill="#5F4B0B"/>
                 <circle cx="115" cy="65" r="6" fill="#5F4B0B"/>
@@ -283,7 +878,7 @@
               <h3 class="pet-card__name">Mingau</h3>
               <div class="pet-card__info">
                 <div class="pet-card__info-item">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a5 5 0 0 0-5 5v3a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 2a5 5 0 0 0-5 5v3a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/></svg>
                   <span>Macho</span>
                 </div>
                 <div class="pet-card__info-divider"></div>
@@ -293,19 +888,20 @@
               </div>
               <p class="pet-card__desc">Mingau é um filhotinho carente, adora colinho e dorme roncando.</p>
               <div class="pet-card__footer">
-                <button class="btn btn-primary btn-block btn-sm" onclick="showPetDetails('Mingau', 'Gato', 'Macho', 'Pequeno', '6 meses', 'Carinhoso e brincalhão', 'Mingau foi abandonado perto da Prefeitura e acolhido pela equipe. Ele ama brinquedos de barbante e sachê de salmão.')">
-                  Ver Detalhes
-                </button>
+                <button class="btn btn-primary btn-block btn-sm" onclick="showPetDetails('Mingau','Gato','Macho','Pequeno','6 meses','Carinhoso e brincalhão','Mingau foi abandonado perto da Prefeitura e acolhido pela equipe. Ele ama brinquedos de barbante e sachê de salmão.')">Ver Detalhes</button>
               </div>
             </div>
           </div>
 
-          <!-- Mock Pet 3 -->
+          <!-- Pet 3 - Barão -->
           <div class="pet-card reveal" data-species="Cão" data-size="Grande" data-age="Adulto" data-gender="Macho">
-            <div class="pet-card__image-wrapper">
+            <div class="pet-card__image-wrapper" style="overflow:hidden; height:180px; display:block; position:relative;">
               <span class="badge badge--success pet-card__badge">Adoção Aberta</span>
-              <svg class="pet-card__image" viewBox="0 0 200 150" style="background: #E1BEE7;" width="100%">
-                <rect width="100%" height="100%" fill="#E1BEE7"/>
+              <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg"
+                   width="100%" height="180"
+                   preserveAspectRatio="xMidYMid slice"
+                   style="display:block;">
+                <rect width="200" height="150" fill="#E1BEE7"/>
                 <circle cx="100" cy="75" r="45" fill="#9C27B0"/>
                 <circle cx="85" cy="65" r="6" fill="#4A148C"/>
                 <circle cx="115" cy="65" r="6" fill="#4A148C"/>
@@ -317,7 +913,7 @@
               <h3 class="pet-card__name">Barão</h3>
               <div class="pet-card__info">
                 <div class="pet-card__info-item">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a5 5 0 0 0-5 5v3a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 2a5 5 0 0 0-5 5v3a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/></svg>
                   <span>Macho</span>
                 </div>
                 <div class="pet-card__info-divider"></div>
@@ -325,21 +921,19 @@
                 <div class="pet-card__info-divider"></div>
                 <div class="pet-card__info-item"><span>3 Anos</span></div>
               </div>
-              <p class="pet-card__desc">Barão é imponente, inteligente e ideal para casas grandes ou chácaras. Muito protetor.</p>
+              <p class="pet-card__desc">Barão é imponente, inteligente e ideal para casas grandes ou chácaras.</p>
               <div class="pet-card__footer">
-                <button class="btn btn-primary btn-block btn-sm" onclick="showPetDetails('Barão', 'Cão', 'Macho', 'Grande', '3 anos', 'Protetor e leal', 'Barão é dócil com a família, mas muito atento. Ele precisa de espaço para correr e gastar energia.')">
-                  Ver Detalhes
-                </button>
+                <button class="btn btn-primary btn-block btn-sm" onclick="showPetDetails('Barão','Cão','Macho','Grande','3 anos','Protetor e leal','Barão é dócil com a família, mas muito atento. Ele precisa de espaço para correr e gastar energia.')">Ver Detalhes</button>
               </div>
             </div>
           </div>
+
         </div>
       </main>
-
     </div>
   </div>
 
-  <!-- ==================== DETAIL PET MODAL ==================== -->
+  <!-- MODAL -->
   <div class="modal-overlay" id="petModal">
     <div class="modal modal--lg">
       <div class="modal__header">
@@ -347,12 +941,13 @@
         <button class="modal__close" data-modal-close="petModal" aria-label="Fechar modal">&times;</button>
       </div>
       <div class="modal__body">
-        <!-- Gallery -->
         <div class="modal-gallery">
           <div class="modal-gallery__main">
-            <!-- Simulated premium pet illustration -->
-            <svg id="modalPetIllustration" viewBox="0 0 400 300" style="background: #E8F5E9; border-radius: var(--radius-lg); width: 100%; height: 300px;">
-              <rect width="100%" height="100%" fill="#E8F5E9"/>
+            <svg id="modalPetIllustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"
+                 width="100%" height="300"
+                 preserveAspectRatio="xMidYMid slice"
+                 style="display:block; border-radius: var(--radius-lg); background:#E8F5E9;">
+              <rect width="400" height="300" fill="#E8F5E9"/>
               <circle cx="200" cy="150" r="80" fill="#81C784"/>
               <circle cx="170" cy="130" r="10" fill="#1B5E20"/>
               <circle cx="230" cy="130" r="10" fill="#1B5E20"/>
@@ -360,13 +955,12 @@
             </svg>
           </div>
           <div class="modal-gallery__thumbs">
-            <svg class="modal-gallery__thumb active" viewBox="0 0 100 80" style="background: #C8F5E5;"><circle cx="50" cy="40" r="20" fill="#00D084"/></svg>
-            <svg class="modal-gallery__thumb" viewBox="0 0 100 80" style="background: #C8F5E5;"><circle cx="50" cy="40" r="20" fill="#00A86B"/></svg>
-            <svg class="modal-gallery__thumb" viewBox="0 0 100 80" style="background: #C8F5E5;"><circle cx="50" cy="40" r="20" fill="#5B9FED"/></svg>
+            <svg class="modal-gallery__thumb active" viewBox="0 0 100 80" width="100%" height="72" style="display:block; background:#C8F5E5;"><circle cx="50" cy="40" r="20" fill="#00D084"/></svg>
+            <svg class="modal-gallery__thumb" viewBox="0 0 100 80" width="100%" height="72" style="display:block; background:#C8F5E5;"><circle cx="50" cy="40" r="20" fill="#00A86B"/></svg>
+            <svg class="modal-gallery__thumb" viewBox="0 0 100 80" width="100%" height="72" style="display:block; background:#C8F5E5;"><circle cx="50" cy="40" r="20" fill="#5B9FED"/></svg>
           </div>
         </div>
 
-        <!-- Info details -->
         <div class="modal-pet-details">
           <div class="modal-pet-tags">
             <span class="badge badge--info" id="modalPetSpecies">Espécie: Cão</span>
@@ -376,16 +970,14 @@
           </div>
           <p style="margin-top: var(--space-md); font-weight: var(--font-weight-semibold);" id="modalPetBehavior">Temperamento: Brincalhão</p>
           <p id="modalPetLongDesc" style="color: var(--color-text-light); line-height: 1.6;">
-            Pipoca é dócil, brincalhona e adora crianças. Excelente para apartamentos. Ela foi resgatada no Parque Residencial Laranjeiras.
+            Pipoca é dócil, brincalhona e adora crianças. Excelente para apartamentos.
           </p>
         </div>
 
         <hr style="border: 0; border-top: 1px solid var(--color-border-light); margin-bottom: var(--space-lg);">
 
-        <!-- Lead Form -->
         <form id="interestForm" novalidate>
           <h4 style="margin-bottom: var(--space-md);">Manifestar Interesse na Adoção</h4>
-          
           <div class="form-row">
             <div class="form-group">
               <label for="interestName" class="form-label">Seu Nome Completo <span class="required">*</span></label>
@@ -398,13 +990,11 @@
               <div class="form-error"></div>
             </div>
           </div>
-
           <div class="form-group">
             <label for="interestMessage" class="form-label">Por que você quer adotar este animal? <span class="required">*</span></label>
             <textarea id="interestMessage" class="form-textarea" placeholder="Conte-nos um pouco sobre você e a futura casa do pet..." required></textarea>
             <div class="form-error"></div>
           </div>
-
           <button type="submit" class="btn btn-primary btn-block btn-lg" id="submitInterestBtn">
             Enviar Solicitação de Interesse
           </button>
@@ -413,71 +1003,103 @@
     </div>
   </div>
 
-  <!-- ==================== FOOTER ==================== -->
-  <footer class="footer" id="contato" style="margin-top: var(--space-4xl);">
-    <div class="container">
-      <div class="footer__grid">
-        <div class="footer__brand">
-          <a href="index.html" class="footer__logo">
-            <div class="footer__logo-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 10c-1.5 2-3 3.5-3 5.5a3 3 0 1 0 6 0c0-2-1.5-3.5-3-5.5z"/>
-                <circle cx="7" cy="6" r="2"/><circle cx="17" cy="6" r="2"/>
-                <circle cx="4.5" cy="11" r="1.5"/><circle cx="19.5" cy="11" r="1.5"/>
-              </svg>
-            </div>
-            Programa ARCA
-          </a>
-          <p class="footer__desc">
-            Animais Resgatados, Cuidados e Acolhidos. Um programa da Prefeitura da Serra/ES dedicado à proteção e bem-estar animal.
-          </p>
-        </div>
-        <div>
-          <h4 class="footer__heading">Links Rápidos</h4>
-          <div class="footer__links">
-            <a href="adocao.html" class="footer__link">Adoção</a>
-            <a href="resgate.html" class="footer__link">Resgate</a>
-            <a href="denuncia.html" class="footer__link">Denúncia</a>
-            <a href="cadastro.html" class="footer__link">Cadastre-se</a>
-            <a href="login.html" class="footer__link">Área do Tutor</a>
+ <footer class="footer" id="contato">
+  <div class="container">
+    
+    <div class="footer__grid">
+
+      <!-- Marca -->
+      <div class="footer__brand">
+        <a href="index.html" class="footer__logo">
+          <div class="footer__logo-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 10c-1.5 2-3 3.5-3 5.5a3 3 0 1 0 6 0c0-2-1.5-3.5-3-5.5z"/>
+              <circle cx="7" cy="6" r="2"/>
+              <circle cx="17" cy="6" r="2"/>
+              <circle cx="4.5" cy="11" r="1.5"/>
+              <circle cx="19.5" cy="11" r="1.5"/>
+            </svg>
           </div>
+
+          Programa <span>ARCA</span>
+        </a>
+
+        <p class="footer__desc">
+          Animais Resgatados, Cuidados e Acolhidos.
+          Um programa da Prefeitura da Serra/ES dedicado
+          à proteção e bem-estar animal.
+        </p>
+      </div>
+
+      <!-- Links -->
+      <div>
+        <h4 class="footer__heading">Links Rápidos</h4>
+
+        <div class="footer__links">
+          <a href="index.html" class="footer__link">Início</a>
+          <a href="adocao.html" class="footer__link">Adoção</a>
+          <a href="resgate.html" class="footer__link">Resgate</a>
+          <a href="denuncia.html" class="footer__link">Denúncia</a>
         </div>
-        <div>
-          <h4 class="footer__heading">Serviços</h4>
-          <div class="footer__links">
-            <a href="agendamento.html" class="footer__link">Castração Gratuita</a>
-            <a href="#" class="footer__link">Vacinação</a>
-            <a href="#" class="footer__link">Consulta Veterinária</a>
-          </div>
+      </div>
+
+      <!-- Serviços -->
+      <div>
+        <h4 class="footer__heading">Serviços</h4>
+
+        <div class="footer__links">
+          <a href="agendamento.html" class="footer__link">Castração</a>
+          <a href="#" class="footer__link">Vacinação</a>
+          <a href="#" class="footer__link">Consulta Veterinária</a>
         </div>
-        <div>
-          <h4 class="footer__heading">Contato</h4>
+      </div>
+
+      <!-- Contato -->
+      <div>
+        <h4 class="footer__heading">Contato</h4>
+
+        <div class="footer__contact">
+
           <div class="footer__contact-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+
             <span>(27) 3291-2000</span>
           </div>
+
           <div class="footer__contact-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+
             <span>arca@serra.es.gov.br</span>
           </div>
+
         </div>
       </div>
-      <div class="footer__bottom">
-        <span>&copy; 2025 Programa ARCA - Prefeitura da Serra/ES. Todos os direitos reservados.</span>
-      </div>
-    </div>
-  </footer>
 
-  <!-- Toast Container -->
+    </div>
+
+    <!-- Bottom -->
+    <div class="footer__bottom">
+      <p>
+        © 2025 Programa ARCA - Prefeitura da Serra/ES.
+        Todos os direitos reservados.
+      </p>
+    </div>
+
+  </div>
+</footer>
+
   <div class="toast-container" id="toastContainer"></div>
 
-  <!-- Scripts -->
   <script src="js/utils.js"></script>
   <script src="js/validation.js"></script>
   <script src="js/main.js"></script>
 
   <script>
-    // Show Pet Details dynamically
     function showPetDetails(name, species, gender, size, age, behavior, longDesc) {
       document.getElementById('modalPetName').textContent = name;
       document.getElementById('modalPetSpecies').textContent = 'Espécie: ' + species;
@@ -487,105 +1109,129 @@
       document.getElementById('modalPetBehavior').textContent = 'Temperamento: ' + behavior;
       document.getElementById('modalPetLongDesc').textContent = longDesc;
 
-      // Adjust illustration colors based on species
-      const modalIllustration = document.getElementById('modalPetIllustration');
+      const svg = document.getElementById('modalPetIllustration');
       if (species === 'Gato') {
-        modalIllustration.style.background = '#FFF9C4';
-        modalIllustration.innerHTML = `
-          <rect width="100%" height="100%" fill="#FFF9C4"/>
-          <circle cx="200" cy="150" r="80" fill="#FBC02D"/>
-          <circle cx="170" cy="130" r="10" fill="#5F4B0B"/>
-          <circle cx="230" cy="130" r="10" fill="#5F4B0B"/>
-          <path d="M180 170 q20 15 40 0" stroke="#5F4B0B" stroke-width="6" fill="none"/>
-        `;
+        svg.style.background = '#FFF9C4';
+        svg.innerHTML = '<rect width="400" height="300" fill="#FFF9C4"/><circle cx="200" cy="150" r="80" fill="#FBC02D"/><circle cx="170" cy="130" r="10" fill="#5F4B0B"/><circle cx="230" cy="130" r="10" fill="#5F4B0B"/><path d="M180 170 q20 15 40 0" stroke="#5F4B0B" stroke-width="6" fill="none"/>';
       } else {
-        modalIllustration.style.background = '#E8F5E9';
-        modalIllustration.innerHTML = `
-          <rect width="100%" height="100%" fill="#E8F5E9"/>
-          <circle cx="200" cy="150" r="80" fill="#81C784"/>
-          <circle cx="170" cy="130" r="10" fill="#1B5E20"/>
-          <circle cx="230" cy="130" r="10" fill="#1B5E20"/>
-          <path d="M180 170 q20 15 40 0" stroke="#1B5E20" stroke-width="6" fill="none"/>
-        `;
+        svg.style.background = '#E8F5E9';
+        svg.innerHTML = '<rect width="400" height="300" fill="#E8F5E9"/><circle cx="200" cy="150" r="80" fill="#81C784"/><circle cx="170" cy="130" r="10" fill="#1B5E20"/><circle cx="230" cy="130" r="10" fill="#1B5E20"/><path d="M180 170 q20 15 40 0" stroke="#1B5E20" stroke-width="6" fill="none"/>';
       }
-
       window.openModal('petModal');
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      // Restore logged user for details form
       const loggedUser = Utils.Storage.get('arca_user');
       if (loggedUser) {
         document.getElementById('interestName').value = loggedUser.name || '';
         document.getElementById('interestPhone').value = loggedUser.phone || '';
       }
 
-      // Setup validations
       const interestForm = document.getElementById('interestForm');
       if (interestForm) {
         Validation.setupFormValidation(interestForm);
-        
         interestForm.addEventListener('submit', (e) => {
-          e.preventDefault();
-          if (Validation.validateForm(interestForm)) {
-            const submitBtn = document.getElementById('submitInterestBtn');
-            submitBtn.classList.add('loading');
 
-            setTimeout(() => {
-              submitBtn.classList.remove('loading');
-              window.closeModal('petModal');
-              interestForm.reset();
-              if (window.showToast) window.showToast('Solicitação de adoção enviada! Nossa equipe entrará em contato.', 'success');
-            }, 1800);
-          } else {
-            if (window.showToast) window.showToast('Por favor, verifique se todos os campos estão preenchidos.', 'error');
-          }
-        });
+  e.preventDefault();
+
+  if (Validation.validateForm(interestForm)) {
+
+    const submitBtn = document.getElementById('submitInterestBtn');
+
+    submitBtn.classList.add('loading');
+
+    
+    const adoptionRequest = {
+
+      petName: document.getElementById('modalPetName').textContent,
+
+      userName: document.getElementById('interestName').value,
+
+      phone: document.getElementById('interestPhone').value,
+
+      message: document.getElementById('interestMessage').value,
+
+      createdAt: new Date().toISOString()
+
+    };
+
+  
+    const requests =
+      JSON.parse(localStorage.getItem('arca_adoption_requests')) || [];
+
+    
+    requests.push(adoptionRequest);
+
+  
+    localStorage.setItem(
+      'arca_adoption_requests',
+      JSON.stringify(requests)
+    );
+
+    console.log('Solicitação salva:', adoptionRequest);
+
+    setTimeout(() => {
+
+      submitBtn.classList.remove('loading');
+
+      window.closeModal('petModal');
+
+      interestForm.reset();
+
+      if (window.showToast) {
+
+        window.showToast(
+          'Solicitação enviada com sucesso!',
+          'success'
+        );
+
       }
 
-      // Filter catalog logic
+    }, 1200);
+
+  } else {
+
+    if (window.showToast) {
+
+      window.showToast(
+        'Preencha todos os campos corretamente.',
+        'error'
+      );
+
+    }
+
+  }
+
+});
+      }
+
       const filterSpecies = document.getElementById('filterSpecies');
-      const filterSize = document.getElementById('filterSize');
-      const filterAge = document.getElementById('filterAge');
-      const filterGender = document.getElementById('filterGender');
-      const clearFiltersBtn = document.getElementById('clearFiltersBtn');
-      const petCards = document.querySelectorAll('.pet-card');
+      const filterSize    = document.getElementById('filterSize');
+      const filterAge     = document.getElementById('filterAge');
+      const filterGender  = document.getElementById('filterGender');
+      const petCards      = document.querySelectorAll('.pet-card');
 
       function filterCatalog() {
-        const species = filterSpecies.value.toLowerCase();
-        const size = filterSize.value.toLowerCase();
-        const age = filterAge.value.toLowerCase();
-        const gender = filterGender.value.toLowerCase();
-
+        const s = filterSpecies.value.toLowerCase();
+        const z = filterSize.value.toLowerCase();
+        const a = filterAge.value.toLowerCase();
+        const g = filterGender.value.toLowerCase();
         petCards.forEach(card => {
-          const cardSpecies = card.getAttribute('data-species').toLowerCase();
-          const cardSize = card.getAttribute('data-size').toLowerCase();
-          const cardAge = card.getAttribute('data-age').toLowerCase();
-          const cardGender = card.getAttribute('data-gender').toLowerCase();
-
-          let match = true;
-          if (species && cardSpecies !== species) match = false;
-          if (size && cardSize !== size) match = false;
-          if (age && cardAge !== age) match = false;
-          if (gender && cardGender !== gender) match = false;
-
+          const match =
+            (!s || card.dataset.species.toLowerCase() === s) &&
+            (!z || card.dataset.size.toLowerCase()    === z) &&
+            (!a || card.dataset.age.toLowerCase()     === a) &&
+            (!g || card.dataset.gender.toLowerCase()  === g);
           card.style.display = match ? '' : 'none';
         });
       }
 
-      [filterSpecies, filterSize, filterAge, filterGender].forEach(el => {
-        el.addEventListener('change', filterCatalog);
-      });
+      [filterSpecies, filterSize, filterAge, filterGender].forEach(el => el.addEventListener('change', filterCatalog));
 
-      if (clearFiltersBtn) {
-        clearFiltersBtn.addEventListener('click', () => {
-          filterSpecies.value = '';
-          filterSize.value = '';
-          filterAge.value = '';
-          filterGender.value = '';
-          filterCatalog();
-        });
-      }
+      document.getElementById('clearFiltersBtn').addEventListener('click', () => {
+        filterSpecies.value = filterSize.value = filterAge.value = filterGender.value = '';
+        filterCatalog();
+      });
     });
   </script>
 </body>
